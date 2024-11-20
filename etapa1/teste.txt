@@ -1,0 +1,30 @@
+12
+#123aa
+#123
+#123;+-*-/*
+AA
+oi
+teste
+'a'
+'x'
+'A'
+'1'
+'-'
+"oii \"oii\"  \n"
+// tesssssssssste
+// 
+/****/
+/* aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaa
+aaaa**/
+"O"
+"OI"
++
+-
+int
+<>
+teste>
+<
+<teste>
+<
+teste
