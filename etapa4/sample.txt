@@ -1,6 +1,7 @@
 // UFRGS - COMPILADORES 2024-2 - TURMA B
 // LUCAS SOLLER
 int teste ( char z , int bzzz ) { return za + bz;}
+int icnc ( char z , int bzzz ) { return za + bz;}
 char a = #158;
 char c = 'x' ;
 char 7 = #100 ;
@@ -16,18 +17,32 @@ COMENTARIO
 
 int teste ( char a , int b ) 
 { 
-  ;;;
+  if(teste) then {}
     if( x = y) then{
       a = v;
+      print "oi";
+      print 1;
+      print 1+1;
+      print v;
+      print teste;
+      print v + 1;
+      print v[1] + 1 + teste(1,1) "oii" teste v;
+      a = teste;
+      a = teste(1,1);
       a = v[a+b];
       a = a[a>b];
+      a = teste & a;
+      a = v & a;
+      a = a & teste;
+      a = v + teste + teste + v;
       b = b;
-      if(a = z) then {
+      if(v = teste(1,1) + 1 | teste + v[1]) then {
         x = a;
-        if(a) then z = z;
+        if(v) then z = z;
       }
     }else{
       a = b;
+      a = v;
       c = d;
     }
 
@@ -40,7 +55,8 @@ int teste ( char a , int b )
 
 
     v[a~a]= a;
-    return a > b;
+    return v & teste;
+    while(v+1 & 1 | teste + teste(1,1) * v[1]){}
 }
 int teste2 ( int z ) { return t + 7 ; }
 
@@ -72,7 +88,8 @@ int main ( )
     {
     1 = incn ( 1 , #1 , #2) ;
     7 = incn ( 7 ) ;
-    7 = incn ( 7 | 7) ;
+    7 = incn ( 7 | 7, 1&1, 1~1) ;
+    7 = incn ( 7 , 7) ;
     }
 
   print "Dobrando algumas vezes 7 fica " 7 "\n" ;

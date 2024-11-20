@@ -7,12 +7,12 @@
 using namespace std;
 
 int semanticError = 0;
-// Mapa global para armazenar os símbolos
+// Mapa global para armazenar as funções
 map<string, FunctionData> tabelaFuncoes;
 FunctionData* lastFunction;
 
 int getSemanticErrorsNumber(){
-    return semanticError;
+  return semanticError;
 }
 
 void checkAndSetDeclarations(AST* node){
@@ -86,7 +86,7 @@ int checkNodeNumType(AST *node){
   if(!node) return -1;
 
   //literas, variables, access to array and function can be float or integer
-  else if(node->type == AST_SYMBOL || node->type == AST_ARRAY_POS || node->type == AST_FUNCALL) {
+  if(node->type == AST_SYMBOL || node->type == AST_ARRAY_POS || node->type == AST_FUNCALL) {
     if(node->symbol->datatype == DATATYPE_INT || node->symbol->datatype == DATATYPE_CHAR || node->symbol->type == SYMBOL_LIT_INT || node->symbol->type == SYMBOL_LIT_CARAC) {
       return 1;
     }
@@ -94,15 +94,19 @@ int checkNodeNumType(AST *node){
   }
   //logical operators dont return real
   else if(node->type == AST_LESS || node->type == AST_GREATER || node->type == AST_NEG
-    || node->type == AST_EQ || node->type == AST_AND || node->type == AST_OR)
+    || node->type == AST_EQ || node->type == AST_AND || node->type == AST_OR){
+
     return 0;
+  }
 
   //arithmetical operations require more checks
   else if(node->type == AST_ADD || node->type == AST_SUB || node->type == AST_MUL || node->type == AST_DIV){
-    if(checkNodeNumType(node->son[1]) == -1 || checkNodeNumType(node->son[0]) == -1 ){
+    int esq = checkNodeNumType(node->son[0]);
+    int dir = checkNodeNumType(node->son[1]);
+    if(esq == -1 || dir == -1 ){
       return -1;
     }
-    else if(checkNodeNumType(node->son[1]) == 0 || checkNodeNumType(node->son[0]) == 0 ){
+    else if(esq == 0 || dir == 0 ){
       return 0;
     }
     return 1;
@@ -133,7 +137,6 @@ void checkDeclarationUsage(AST* node){
           semanticError++;
         }
       }
-
     }
 
     //check if vectors calls are calling vectors
@@ -209,8 +212,28 @@ void checkDeclarationUsage(AST* node){
       }
     }
 
+    if(node->type == AST_KW_RETURN) {
+      //check the type of the expression that is being returned
+      //in this case, the defined types are interchangeable
+      if(checkNodeNumType(node->son[0]) != 1) {
+        cerr << "Erro semântico na linha " << node->line << " [RETURN]: valor de retorno inválido.\n";
+        semanticError++;
+      }
+    }
+
     if(node->type == AST_VECTOR_DECL_EMPTY){
       checkVectorIndex(node);
+    }
+
+    if(node->type == AST_SYMBOL){
+      if(node->symbol->type == SYMBOL_VEC){
+        cerr << "Erro semântico na linha " << node->line << " [VECTOR]: vetor " << node->symbol->text << " está sendo usado como um escalar.\n";
+        semanticError++;
+      }
+      else if(node->symbol->type == SYMBOL_FUNC){
+        cerr << "Erro semântico na linha " << node->line << " [VECTOR]: função " << node->symbol->text << " está sendo usado como um escalar.\n";
+        semanticError++;
+      }
     }
 
     int i;
@@ -223,36 +246,17 @@ void checkVectorIndex(AST* node) {
   //IF SON[0] IS TO CHECK THE AST_ARRAY_POS INDEX. IF SON[1] IS TO CHECK THE VECTOR_DECL INDEX.
   if (node->type == AST_ARRAY_POS || node->type == AST_VECTOR_ATRIB){
     if(checkNodeNumType(node->son[0]) != 1){
-      cerr << "Erro semântico na linha " << node->line << ": índice do vetor não é um número inteiro.\n";
+      cerr << "Erro semântico na linha " << node->line << " [VECTOR]: índice do vetor não é um número inteiro.\n";
       semanticError++;
     }
   }
   else if (node->type == AST_VECTOR_DECL || node->type == AST_VECTOR_DECL_EMPTY){
     if(checkNodeNumType(node->son[1]) != 1){
-      cerr << "Erro semântico na linha " << node->line << ": índice do vetor não é um número inteiro.\n";
+      cerr << "Erro semântico na linha " << node->line << " [VECTOR]: índice do vetor não é um número inteiro.\n";
       semanticError++;
     }
   }
 }
-
-void checkReturnType(AST* node) {
-  if(!node) return;
-
-  if(node->type == AST_KW_RETURN) {
-      //check the type of the expression that is being returned
-      //in this case, the defined types are interchangeable
-      if(checkNodeNumType(node->son[0]) != 1) {
-        cerr << "Erro semântico na linha " << node->line << ": valor de retorno inválido.\n";
-        semanticError++;
-        return;
-      }
-  }
-
-  for(int i=0; i<MAX_SONS; i++) { 
-    checkReturnType(node->son[i]);
-  }                               
-}
-
 
 void checkFuncParam(AST* node, const char* function_name, int line){
 	AST* current_node;
@@ -269,7 +273,7 @@ void checkFuncParam(AST* node, const char* function_name, int line){
       //verify if the parameter is type integer
       if(func_data->paramType[param_count] == DATATYPE_INT || func_data->paramType[param_count] == DATATYPE_CHAR)
         if(checkNodeNumType(current_node->son[0]) != 1 ){
-          cerr << "Erro semântico na linha " << node->line << ": tipo de parâmetro da função inválido. (parâmetro " << param_count+1 << ")\n";
+          cerr << "Erro semântico na linha " << node->line << " [FUNCALL]: tipo de parâmetro da função inválido. (parâmetro " << param_count+1 << ")\n";
           semanticError++;
         }
 
@@ -278,11 +282,11 @@ void checkFuncParam(AST* node, const char* function_name, int line){
 	}
 
 	if(param_count > numParam){
-    cerr << "Erro semântico na linha " << node->line << ": muitos argumentos na função " << function_name << ".\n";
+    cerr << "Erro semântico na linha " << node->line << " [FUNCALL]: muitos argumentos na função " << function_name << ".\n";
   	semanticError++;
 	}
 	if(param_count < numParam){
-    cerr << "Erro semântico na linha " << node->line << ": argumentos faltando na função " << function_name << ".\n";
+    cerr << "Erro semântico na linha " << node->line << " [FUNCALL]: argumentos faltando na função " << function_name << ".\n";
   	semanticError++;
 	}
 }

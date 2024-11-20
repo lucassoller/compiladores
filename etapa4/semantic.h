@@ -42,9 +42,6 @@ void checkDeclarationUsage(AST* node);
 //Check if all index of an vector are Integers.
 void checkVectorIndex(AST* node);
 
-//Check the return types.
-void checkReturnType(AST* node);
-
 //Check all the functions parameters
 void checkFuncParam(AST* node, const char* function_name, int line);
 

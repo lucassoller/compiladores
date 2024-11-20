@@ -79,7 +79,7 @@ start: decl                                                   { //astPrint($1, 0
                                                                 checkAndSetDeclarations($1); 
                                                                 checkUndeclarations();
                                                                 checkDeclarationUsage($1);
-                                                                checkReturnType($1);}
+                                                                }
 
 decl: dec decl                                                { $$ = astCreate(AST_DEC,0,$1,$2,0,0); }
   |                                                           { $$ = 0; }
