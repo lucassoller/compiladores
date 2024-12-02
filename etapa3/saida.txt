@@ -12,15 +12,14 @@ int matrix[#100];
 int teste(char a, int b)	{
 if (x = y) then
 	{
-	a = a + c + c + d & z | a ~ k - q / 3 > a < z = 1;
-	a = a;
-	b = b;
+	;
+	;
+	;
 if (a = z) then
 	{
-	x = a;
-	if (a) then
-z = z
-;
+	;
+if (a) then
+
 
 	}
 
@@ -29,23 +28,24 @@ z = z
 
 else
 	{
-	a = b;
-	c = d;
 
 	}
+	;
+	;
+	;
+	;
+	;
 if (1 = #100) then
 	{
-	a = a + #1;
 
 	}
 
 else
 	{
-	a = c;
 
 	}
 	{
-	a = a;
+	;
 	{
 
 	}
@@ -58,7 +58,6 @@ else
 	}
 
 int teste2(int z)	{
-	return t + 7;
 
 	}
 
@@ -71,50 +70,42 @@ int v[#10] =  'a' #0 'b' #0 #0 #0 #0 #0 #0 #0;
 int matrix[#100];
 int v[#10];
 int main()	{
-	number = 0;
-	7 = 7 - 1;
-	7 = #5;
-	v[e + t] = #55;
-	print v[#5] 7 c;
-	1 = #2;
-	print "Digite um numero: \n";
-	read 7;
-	while ( i < #10 + 7)
-	{
-	1 = incn(1, #1);
-	7 = incn(7, 7);
-
-	}
-print "Dobrando algumas vezes 7 fica " 7 "\n";
-	if (a = #15) then
-	{
-	a = a + #1;
-	print "A era=#15\n";
-	if (a = b) then
+	;
+	;
+	;
+	;
+	;
+	;
+	;
+	;
+while ( i < #10 + 7)
 	{
 
 	}
+	;
+if (a = #15) then
+	{
+	;
+	;
+if (a = b) then
+	{
 
-;
+	}
 	;
 	;
-	;
+
 
 	}
 if (1 = #100) then
 	{
-	print "Nao tem como isso...\n";
 
 	}
 
-else
-print "OK!\n"
-;
+
 
 	}
 
 int incn(int x, int n)	{
-	return x + n;
 
 	}
 
@@ -126,29 +117,24 @@ int 1 = #1;
 int v[#10] =  'a' #0 'b' #0 #0 #0 #0 #0 #0 #0;
 int matrix[#100];
 int main()	{
-	number = 0;
-	7 = 7 - 1;
-	7 = #5;
-	v[7] = #55;
-	print v[#5] 7 c;
-	1 = #2;
-	print "Digite um numero: \n";
-	read 7;
-	while ( i < #10)
+	;
+	;
+	;
+	;
+	;
+	;
+	;
+	;
+while ( i < #10)
 	{
-	1 = incn(1, #1);
-	7 = incn(7, 7);
 
 	}
-print "Dobrando algumas vezes 7 fica " 7 "\n";
-	if (a = #15) then
+	;
+if (a = #15) then
 	{
-	a = a + #1;
-	print "A era=#15\n";
 
 	}
-if (1 = #100) then
-a = a + #1
+	if (1 = #100) then
 
 ;
 	{
@@ -158,11 +144,10 @@ a = a + #1
 
 	}
 
+
 	}
 
 int incn(int x, int n)	{
-	return x + n;
-	;
 	;
 	;
 	;

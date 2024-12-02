@@ -136,7 +136,6 @@ lcmd: cmd ';' lcmd                                            { $$ = astCreate(A
   ;
 
 
-
 // Lista de comandos (recursão à direita)
 cmd: TK_IDENTIFIER '=' expr                                   { $$ = astCreate(AST_VAR_ATRIB,$1,$3,0,0,0); }
   | TK_IDENTIFIER '[' expr ']' '=' expr                       { $$ = astCreate(AST_VECTOR_ATRIB,$1,$3,$6,0,0); }

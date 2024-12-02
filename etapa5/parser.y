@@ -7,6 +7,8 @@
 
 #include "ast.h"
 #include "semantic.h"
+#include "tac.h"
+
 using namespace std;
 
 int yylex();
@@ -79,6 +81,7 @@ start: decl                                                   { //astPrint($1, 0
                                                                 checkAndSetDeclarations($1); 
                                                                 checkUndeclarations();
                                                                 checkDeclarationUsage($1);
+                                                                tacPrintForward(tacPrintReverse(codeGenerator($1)));
                                                                 }
 
 decl: dec decl                                                { $$ = astCreate(AST_DEC,0,$1,$2,0,0); }
