@@ -18,35 +18,30 @@
 #define TAC_GREATER 7
 #define TAC_NEG 8
 
-#define TAC_LE 9
-#define TAC_GE 10
-#define TAC_EQ 11
-#define TAC_NE 12
-#define TAC_AND 13
-#define TAC_OR 14
+#define TAC_EQ 9
+#define TAC_AND 10
+#define TAC_OR 11
 
-#define TAC_ASS 15
-#define TAC_POINTER_ASS 16
-#define TAC_VEC_ATRIB 17
-#define TAC_VEC_INDEX 18
-#define TAC_READ 19
-#define TAC_PRINT 20
-#define TAC_RET 21
-#define TAC_FUN_START 22
-#define TAC_FUN_END 23
-#define TAC_FUNCALL 24
-#define TAC_FUNARG 25
-#define TAC_VARDEC 26
-#define TAC_VECDEC 27
-#define TAC_POINTERDEC 28
+#define TAC_ASS 12
+#define TAC_VEC_ATRIB 13
+#define TAC_VEC_INDEX 14
+#define TAC_READ 15
+#define TAC_PRINT 16
+#define TAC_RET 17
+#define TAC_FUN_START 18
+#define TAC_FUN_END 19
+#define TAC_FUNCALL 20
+#define TAC_FUNARG 21
+#define TAC_VARDEC 22
+#define TAC_VECDEC 23
 
-#define TAC_IFZ		30
-#define TAC_LABEL	31
+#define TAC_IFZ		24
+#define TAC_LABEL	25
 
-#define TAC_JZ 34
-#define TAC_JUMP 35
-#define TAC_JE 36
-#define TAC_PRINT_ARG 37
+#define TAC_JZ 26
+#define TAC_JUMP 27
+#define TAC_JE 28
+#define TAC_PRINT_ARG 29
 
 typedef struct tac {
 
@@ -72,15 +67,23 @@ TAC* makeBinOp(int type, TAC* code0, TAC* code1);
 TAC* tacJoin (TAC* l1, TAC* l2);
 
 //Function tacPrintSingle.
-void tacPrintSingle(TAC* tac);
+void tacPrint(TAC* tac);
 
 //Function tacPrintBack.
 void tacPrintBack(TAC* tac);
 
-//Function tacPrintReverse.
-TAC* tacPrintReverse(TAC* last);
+//Function Print
+TAC* makePrint(TAC* code0, TAC* code1);
 
-//Function tacPrintForward.
-void tacPrintForward(TAC* tac);
+//Function IF ELSE
+TAC* makeIfThenElse (TAC* code0, TAC* code1, TAC* code2);
 
+//Function While
+TAC* makeWhile(TAC* code0, TAC* code1);
+
+//Create functions
+TAC* makeFun(Symbol* funSymbol, TAC* code3);
+
+//Update function args
+void updateFuncArgs(TAC* func, Symbol* symbol);
 #endif

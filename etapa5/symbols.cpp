@@ -57,16 +57,15 @@ Symbol* makeTemp(void) {
 	static int serialNumber = 0;
 	static char buffer[64];
 
-	sprintf(buffer,"_tMpComP986%d", serialNumber++);
+	sprintf(buffer,"_tmp%d", serialNumber++);
 	return insertSymbol(SYMBOL_SCALAR, buffer);
 }
-
 
 Symbol* makeLabel(void) {
 
 	static int serialNumber = 0;
 	static char buffer[64];
 
-	sprintf(buffer, "_labelLCoMp8975%d", serialNumber++);
+	sprintf(buffer, "_labelTemp%d", serialNumber++);
 	return insertSymbol(SYMBOL_SCALAR, buffer);
 }

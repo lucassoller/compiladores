@@ -1,5 +1,10 @@
 int teste(char z, int bzzz)	{
-	return za + bz;
+return za + bz;
+
+	}
+
+int icnc(char z, int bzzz)	{
+return za + bz;
 
 	}
 
@@ -11,61 +16,21 @@ int 1 = #1;
 int v[#11] =  'a' #0 'b' #1 #2 #0 #0 #0 #0 'a';
 int matrix[#100];
 int teste(char a, int b)	{
-	;
-	;
-	;
-	if (x = y) then
-	{
-	a = v;
-	a = v[a + b];
-	a = a[a > b];
-	b = b;
-if (a = z) then
-	{
-	x = a;
-	if (a) then
-z = z
-;
+if (teste) then
+a = a;
 
-	}
-
-
-	}
-
-else
-	{
-	a = b;
-	c = d;
-
-	}
+a = a;
+b = b;
 if (1 = #100) then
-	{
-	a = a + #1;
-
-	}
+print "Nao tem como isso...\n";
 
 else
-	{
-	a = c;
-
-	}
-	{
-	a = a;
-	{
-
-	}
-	{
-
-	}
-
-	}
-v[a ~ a] = a;
-	return a > b;
+print "OK!\n";
 
 	}
 
 int teste2(int z)	{
-	return t + 7;
+return t + 7;
 
 	}
 
@@ -78,77 +43,47 @@ int v[#10] =  'a' #0 'b' #0 #0 #0 #0 #0 #0 #0;
 int matrix[#100];
 int v[#10];
 int main()	{
-	number = 0;
-	7 = 7 - 1;
-	7 = #5;
-	v[7] = ( a + a + ( a * ( a | a ) ) );
-	print v[#5] 7 c;
-	1 = #2;
-	print "Digite um numero: \n";
-	read 7;
-	while ( i < #10 + 7)
-	{
-	1 = incn(1, #1, #2);
-	7 = incn(7);
-	7 = incn(7 | 7);
-
-	}
-print "Dobrando algumas vezes 7 fica " 7 "\n";
-	if (a = #15) then
-	{
-	a = a + #1 | a;
-	print "A era=#15\n";
-if (a = b) then
-	{
-
-	}
-
-
-	}
-if (1 = #100) then
-	{
-	print "Nao tem como isso...\n";
-
-	}
-
-else
-print "OK!\n"
-;
+number = 0;
+7 = 7 - 1;
+7 = #5;
+v[7] = ( a + a + ( a * ( a | a ) ) );
+print v[#5] 7 c;
+1 = #2;
 
 	}
 
 int incn(int x, int n)	{
-	return x > n;
+return x > n;
 
 	}
 
 int main()	{
-	number = 0;
-	7 = 7 - 1;
-	7 = #5;
-	v[7] = #55;
-	print v[#5] 7 c;
-	1 = #2;
-	print "Digite um numero: \n";
-	read 7;
-	while ( i < #10)
+number = 0;
+7 = 7 - 1;
+7 = #5;
+v[7] = #55;
+print v[#5] 7 c;
+1 = #2;
+print "Digite um numero: \n";
+read 7;
+while ( i < #10)
 	{
-	1 = incn(1, #1);
-	7 = incn(7, 7);
-	7 = func(7);
+1 = incn(1, #1);
+7 = incn(7, 7);
+7 = func(7);
 
 	}
 print "Dobrando algumas vezes 7 fica " 7 "\n";
-	if (a = #15) then
+if (a = #15) then
 	{
-	a = a + #1;
-	print "A era=#15\n";
+a = a + #1;
+print "A era=#15\n";
 
 	}
-if (1 = #100) then
-a = a + #1
 
-;
+if (1 = #100) then
+a = a + #1;
+
 	{
 	{
 
@@ -159,7 +94,7 @@ a = a + #1
 	}
 
 int incn(int x, int n)	{
-	return x + n;
+return x + n;
 
 	}
 
