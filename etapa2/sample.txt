@@ -132,42 +132,26 @@ int main ()
     {
     a = a + #1;
     print "A era=#15\n";
+    if(a=#1) then{
+      a = a;
     }
-    
-  if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-    if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-      if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-    if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-      if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-    if (1=#100) then
-    {
-    print "Nao tem como isso...\n";
-    
+        if(a=#1) then{
+      a = a;
     }
-    }a = a + b;
-  else
-    print "OK!\n"; 
+    if(a=#1) then{
+      a = a;
     }
-    }a = a + b;
-  else
-    print "OK!\n"; 
+        else {
+      a = a;
     }
-    }a = a + b;
-  else
-    print "OK!\n"; 
-  {{}} {}
+    if(a=#1) then{
+      a = a;
+    }else {
+      a = a;
+    }
+    }
   }
-
+    
 int incn (int x, int n )
   {
     

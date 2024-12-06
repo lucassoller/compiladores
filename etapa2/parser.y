@@ -46,141 +46,121 @@ int getLineNumber();
 %%
 
 // Início do programa
-start: decl start
-  | func start
-  | 
+start: decl 
+
+decl: dec decl                                                
+  |                                                           
+  ;
+
+dec: vardec                                                   
+  | fundec                                                    
   ;
 
 // Declarações
-decl: tipo declrest ';'
-  ;
-
-// Atribuição e inicialização de vetor para declaração
-declrest: vetordecl
-  | TK_IDENTIFIER '=' valor
-  ;
-
-// Declaração de vetor
-vetordecl: TK_IDENTIFIER '[' LIT_INT ']' vetorrest
-  ;
-
-// Declaração do resto do vetor
-vetorrest: '=' valorvetor
-  |
+vardec: tipo TK_IDENTIFIER '=' valor ';'                      
+  | tipo TK_IDENTIFIER '[' valorvec ']' '=' valorvetor ';'    
+  | tipo TK_IDENTIFIER '[' valorvec ']' ';'                   
   ;
 
 // Valores do vetor
-valorvetor: valor valorvetor
-  | 
+valorvetor: LIT_INT valorvetor                                
+  | LIT_CHAR valorvetor                                       
+  |                                                          
   ;
 
-// Atribuição e inicialização de vetor
-atribuicao: vetor
-  | TK_IDENTIFIER '=' expr
-  ;
-
-// Declaração de vetor
-vetor: TK_IDENTIFIER '[' expr ']'  '=' expr
-  ;
 
 // Tipo de variável
-tipo: KW_INT
-  | KW_CHAR
+tipo: KW_INT                                                 
+  | KW_CHAR                                                   
   ;
 
 // Valor de variável
-valor: LIT_INT
-  | LIT_CHAR
+valor: LIT_INT                                                
+  | LIT_CHAR                                                  
   ;
 
-// Chamada de função
-funcreturn: TK_IDENTIFIER '(' lparam ')' 
-  ;
-
-// Parâmetros da função
-lparam: lparamini
-  | 
-  ;
-
-// Parâmetros iniciais da função
-lparamini: expr lparamrest
-  ;
-
-// Lista de parâmetros
-lparamrest: ',' lparamini
-  | 
+// Valor de variável
+valorvec: LIT_INT                                             
   ;
 
 // Definição de função
-func: tipo TK_IDENTIFIER '(' defbodyfunc ')' blockfunc
+fundec: tipo TK_IDENTIFIER '(' funlparam ')' block            
   ;
 
-// Corpo da função
-defbodyfunc: tipo TK_IDENTIFIER defbodyfuncrest
-  | 
-  ;
+  
+funlparam: paramdecl paramrest			                          
+	|			                                                     
+	;
 
-// Corpo da função com parâmetros adicionais
-defbodyfuncrest: ',' tipo TK_IDENTIFIER defbodyfunc
-  | 
-  ;
+paramdecl: tipo TK_IDENTIFIER			                            
+	;
 
-// Comando if-else
-comando_if: KW_IF '(' expr ')' KW_THEN lcmd KW_ELSE lcmd
-  | KW_IF '(' expr ')' KW_THEN lcmd
-  ;
-
-// Comando while
-comando_while: KW_WHILE '(' expr ')' lcmd
-  ;
+paramrest: ',' paramdecl paramrest			                      
+	|			                                                     
+	;
 
 // Bloco de código 
-blockfunc: '{' lcmd '}'
+block: '{' lcmd '}'                                          
   ;
 
-// Comandos iniciais
-lcmdinit: KW_PRINT lprint ';'
-  | KW_RETURN expr ';'
-  | KW_READ TK_IDENTIFIER ';'
-  | atribuicao ';'
-  | ';'                      // Comando vazio permitido
+lcmd: cmd lcmd                                               
+  | cmd                                                      
   ;
 
 // Lista de comandos (recursão à direita)
-lcmd: lcmdinit lcmd                // Comandos iniciais em sequência
-  | comando_if                     // Comando if seguido de mais comandos
-  | comando_while                  // Comando while seguido de mais comandos
-  | blockfunc lcmd                 // Bloco de código seguido de mais comandos
-  |                                // Permite lcmd vazio (comando vazio)
+cmd: TK_IDENTIFIER '=' expr ';'                               
+  | TK_IDENTIFIER '[' expr ']' '=' expr ';'                   
+  | KW_PRINT lprint ';'                                       
+  | KW_RETURN expr ';'                                        
+  | KW_READ TK_IDENTIFIER ';'                                 
+  | KW_IF '(' expr ')' KW_THEN cmd KW_ELSE cmd                
+  | KW_IF '(' expr ')' KW_THEN cmd                            
+  | KW_WHILE '(' expr ')' cmd                                 
+  | block                                                     
+  | ';'                                                       
+  |                                                          
   ;
 
 // Impressão
-lprint: LIT_STRING printrest
-  | expr printrest
+lprint: printelement printrest                                
   ;
 
 // Lista de impressão
-printrest: lprint
-  | 
+printrest: printelement printrest                             
+  |                                                          
   ;
 
-// Expressões
-expr: LIT_INT
-  | LIT_CHAR
-  | TK_IDENTIFIER
-  | funcreturn
-  | TK_IDENTIFIER '[' expr ']'
-  | expr '+' expr
-  | expr '-' expr
-  | expr '*' expr
-  | expr '/' expr
-  | expr '<' expr
-  | expr '>' expr
-  | expr '&' expr
-  | expr '|' expr
-  | expr '~' expr
-  | expr '=' expr
-  | '(' expr ')'
+printelement: expr                                           
+  | LIT_STRING                                                
+  ;
+
+// Parâmetros da função
+lparam: expr lparamrest                                       
+  |                                                          
+  ;
+
+// Lista de parâmetros
+lparamrest: ',' expr lparamrest                               
+  |                                                          
+  ;
+
+// Expressões 
+expr: TK_IDENTIFIER                                           
+  | LIT_CHAR                                                  
+  | LIT_INT                                                   
+  | expr '+' expr                                             
+  | expr '-' expr                                            
+  | expr '*' expr                                            
+  | expr '/' expr                                            
+  | expr '<' expr                                             
+  | expr '>' expr                                             
+  | expr '&' expr                                            
+  | expr '|' expr                                            
+  | expr '~' expr                                            
+  | expr '=' expr                                            
+  | '(' expr ')'                                             
+  | TK_IDENTIFIER '(' lparam ')'                                          
+  | TK_IDENTIFIER '[' expr ']'                                                           
   ;
 
 %% 
