@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "ast.h"
+
 using namespace std;
 
 int yylex();
@@ -73,8 +74,9 @@ int getLineNumber();
 %%
 
 // Início do programa
-start: decl                                                   { astPrint($1, 0);
-                                                                astGenerateFile($1);}
+start: decl                                                   { astPrint($1, 0); 
+                                                                astGenerateFile($1, outputfile);
+                                                                }
 
 decl: dec decl                                                { $$ = astCreate(AST_DEC,0,$1,$2,0,0); }
   |                                                           { $$ = 0; }
@@ -131,21 +133,21 @@ paramrest: ',' paramdecl paramrest			                      { $$ = astCreate(AST_
 block: '{' lcmd '}'                                           { $$ = astCreate(AST_BLOCK,0,$2,0,0,0); }
   ;
 
-lcmd: cmd ';' lcmd                                            { $$ = astCreate(AST_LCMD,0,$1,$3,0,0); }
+lcmd: cmd lcmd                                                { $$ = astCreate(AST_LCMD,0,$1,$2,0,0); }
   | cmd                                                       { $$ = $1; }
   ;
 
-
 // Lista de comandos (recursão à direita)
-cmd: TK_IDENTIFIER '=' expr                                   { $$ = astCreate(AST_VAR_ATRIB,$1,$3,0,0,0); }
-  | TK_IDENTIFIER '[' expr ']' '=' expr                       { $$ = astCreate(AST_VECTOR_ATRIB,$1,$3,$6,0,0); }
-  | KW_PRINT lprint                                           { $$ = astCreate(AST_KW_PRINT,0,$2,0,0,0); }
-  | KW_RETURN expr                                            { $$ = astCreate(AST_KW_RETURN,0,$2,0,0,0); }
-  | KW_READ TK_IDENTIFIER                                     { $$ = astCreate(AST_KW_READ,$2,0,0,0,0); }
+cmd: TK_IDENTIFIER '=' expr ';'                               { $$ = astCreate(AST_VAR_ATRIB,$1,$3,0,0,0); }
+  | TK_IDENTIFIER '[' expr ']' '=' expr ';'                   { $$ = astCreate(AST_VECTOR_ATRIB,$1,$3,$6,0,0); }
+  | KW_PRINT lprint ';'                                       { $$ = astCreate(AST_KW_PRINT,0,$2,0,0,0); }
+  | KW_RETURN expr ';'                                        { $$ = astCreate(AST_KW_RETURN,0,$2,0,0,0); }
+  | KW_READ TK_IDENTIFIER ';'                                 { $$ = astCreate(AST_KW_READ,$2,0,0,0,0); }
   | KW_IF '(' expr ')' KW_THEN cmd KW_ELSE cmd                { $$ = astCreate(AST_KW_IF,0,$3,$6,$8,0); }
   | KW_IF '(' expr ')' KW_THEN cmd                            { $$ = astCreate(AST_KW_IF,0,$3,$6,0,0); }
   | KW_WHILE '(' expr ')' cmd                                 { $$ = astCreate(AST_KW_WHILE,0,$3,$5,0,0); }
-  | block cmd                                                 { $$ = astCreate(AST_NEW_BLOCK,0,$1,$2,0,0); }
+  | block                                                     { $$ = astCreate(AST_NEW_BLOCK,0,$1,0,0,0); }
+  | ';'                                                       { $$ = astCreate(AST_END_ESCAPE,0,0,0,0,0); }
   |                                                           { $$ = 0; }
   ;
 

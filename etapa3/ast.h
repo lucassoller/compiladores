@@ -72,6 +72,7 @@
 
 #define AST_LIT_CHAR 35
 #define AST_LIT_INT 36
+#define AST_END_ESCAPE 37
 
 extern ofstream outputfile;
 
