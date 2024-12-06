@@ -110,9 +110,8 @@ void astGenerateFile(AST *node, ofstream& output_file){
 						output_file << "]";
 						output_file << ";\n";
 						break;
-			case AST_LCMD: output_file << "\t";
+			case AST_LCMD:
 						astGenerateFile(node->son[0], output_file);
-						output_file << ";\n";
 						astGenerateFile(node->son[1], output_file);
 						break;
 			case AST_SYMBOL:output_file << node->symbol->text;
@@ -145,11 +144,13 @@ void astGenerateFile(AST *node, ofstream& output_file){
 						break;
 			case AST_VAR_ATRIB: output_file << node->symbol->text << " = ";
 						astGenerateFile(node->son[0], output_file);
+						output_file << ";\n";
 						break;
 			case AST_VECTOR_ATRIB: output_file << node->symbol->text << "[";
 						astGenerateFile(node->son[0], output_file);
 						output_file << "] = ";
 						astGenerateFile(node->son[1], output_file);
+						output_file << ";\n";
 						break;
 			case AST_ADD: astGenerateFile(node->son[0], output_file);
 						output_file << " + ";
@@ -201,12 +202,14 @@ void astGenerateFile(AST *node, ofstream& output_file){
 						break;
 			case AST_KW_CHAR: output_file << "char "; break;
 			case AST_KW_INT: output_file << "int "; break;
-			case AST_KW_READ: output_file  << "read " << node->symbol->text; break;
+			case AST_KW_READ: output_file  << "read " << node->symbol->text << ";\n"; break;
       		case AST_KW_RETURN: output_file  << "return ";
 						astGenerateFile(node->son[0], output_file);
+						output_file << ";\n";
 						break;
       		case AST_KW_PRINT: output_file  << "print ";
 						astGenerateFile(node->son[0], output_file);
+						output_file << ";\n";
 						break;
 			case AST_KW_WHILE: output_file << "while ( ";
 	          			astGenerateFile(node->son[0], output_file);
@@ -223,8 +226,7 @@ void astGenerateFile(AST *node, ofstream& output_file){
 							astGenerateFile(node->son[2], output_file);
 						}
 						break;
-			case AST_NEW_BLOCK: astGenerateFile(node->son[0], output_file);
-						astGenerateFile(node->son[1], output_file);
+			case AST_NEW_BLOCK: astGenerateFile(node->son[0], output_file);						
 						break;
 			case AST_PRINT_ARG: astGenerateFile(node->son[0], output_file);
 						if(node->son[1] != 0){
@@ -242,8 +244,8 @@ void astGenerateFile(AST *node, ofstream& output_file){
 						astGenerateFile(node->son[0], output_file);
 						output_file << " )";
 						break;
+			case AST_END_ESCAPE: output_file << ";"; break;
 			default: output_file << "UNKNOWN"; break;
 		}
 	}
 }
-
